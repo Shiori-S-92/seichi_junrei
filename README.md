@@ -14,6 +14,9 @@
 投稿者は、実際に行ってみた感想や実際の営業時間、注意事項等を共有し、
 閲覧者は、旅行前やちょっとお出かけの前等の計画の際にこれを参考する。
 
+## 実装機能リストのURL
+https://docs.google.com/spreadsheets/d/1JXGGBJccaIpH-MzNRmEPJAa8QhEpuWoCehd08OcsznU/edit?usp=sharing
+
 ## 設計書
 <...>
 
