@@ -10,3 +10,14 @@ Admin.create!(
   email: "a@a",
   password: "aaaaaa"
 )
+
+User.create!(
+  [
+    {
+      name: "さくら",
+      email: "aaaaaa@aaaaaa",
+      encrypted_password: "aaaaaa",
+      is_active: "true"
+    }
+  ]
+)

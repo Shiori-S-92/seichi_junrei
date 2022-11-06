@@ -1,2 +1,37 @@
-<h1>Admin::Users#show</h1>
-<p>Find me in app/views/admin/users/show.html.erb</p>
+<!--<h1>Admin::Users#show</h1>-->
+<!--<p>Find me in app/views/admin/users/show.html.erb</p>-->
+
+<h1><%= @user.name %>さんのユーザー情報詳細</h1>
+
+<table>
+  <!--<thead></thead>-->
+  <tbody>
+    <tr>
+      <td>ユーザーID</td>
+      <td><%= @user.id %></td>
+    </tr>
+    <tr>
+      <td>ユーザー表示名</td>
+      <td><%= @user.name %></td>
+    </tr>
+    <tr>
+      <td>メールアドレス</td>
+      <td><%= @user.email %></td>
+    </tr>
+    <tr>
+      <td>ユーザーステータス</td>
+      <td>
+      	<% if @user.is_active? %>
+      		<span class="text-active">有効</span>
+      	<% else %>
+      		<span class="text-invalid">退会済み</span>
+      	<% end %>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!--会員の投稿一覧(青ボタン)-->
+<%= link_to "会員の投稿一覧", class: "btn btn-primary"  %>
+<!--編集する（緑ボタン）-->
+&nbsp<%= link_to "編集する", class: "btn btn-success" %>
