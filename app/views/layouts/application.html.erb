@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>SeichiJunrei</title>
+    <title>swell</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -11,6 +11,29 @@
   </head>
 
   <body>
-    <%= yield %>
+    <header class="<%= (admin_signed_in? ? "admin_header" : "" ) %>">
+      <div class="header-content">
+        <%= link_to 'swell', (admin_signed_in? ? admin_top_path : root_path ), class: "logo" %>
+        <ul class="flex">
+          <% if admin_signed_in? %>
+            <li><%= link_to '会員一覧',  admin_users_path %></li>
+            <li><%= link_to 'ログアウト', destroy_admin_session_path, method: :delete %></li>
+          <% elsif user_signed_in? %>
+            <p>swellへようこそ、<%= current_user.name %>さん!</p>
+            <li><%= link_to 'About', about_path %></li>
+            <li><%= link_to 'マイページ', mypage_path %></li>
+            <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
+          <% else %>
+            <li><%= link_to 'About', about_path %></li>
+            <li><%= link_to '新規登録', new_user_registration_path %></li>
+            <li><%= link_to 'ログイン', new_user_session_path %></li>
+          <% end %>
+        </ul>
+      </div>
+    </header>
+    <main>
+      <%= yield %>
+    </main>
+    <footer></footer>
   </body>
 </html>
