@@ -13,6 +13,12 @@ class Admin::UsersController < ApplicationController
   end
 
   def update
+    @user = user.find(params[:id])
+    if @user.update(user_params)
+      redirect_to admin_user_path(@user.id)
+    else
+      render :edit
+    end
   end
 
   private
