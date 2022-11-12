@@ -14,6 +14,17 @@ import "bootstrap";
 import "../stylesheets/application"
 import '@fortawesome/fontawesome-free/js/all'
 
+<script>
+  $(document).on('turbolinks:load', function() {
+    $('.jscroll-div').jscroll({ // 追加したdivのclass名と合わせる
+      contentSelector: '.jscroll',
+      nextSelector: '.next a',  // 次ページリンクのセレクタ
+      loadingHtml: '読み込み中',
+      padding: 10
+    });
+  });
+</script>
+
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()

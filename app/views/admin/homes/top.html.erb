@@ -4,9 +4,11 @@
 <h1>swell 管理者サイト</h1>
 
 <h3>全ユーザー投稿一覧</h3>
-<div class="posts">
+<div class='jscroll-div'>
   <% @posts.each do |post| %>
     <%= link_to admin_post_path(post.id) do %>
+      <!--投稿画像-->
+      <%= image_tag post.get_image(100,100) %>
       <!--投稿日付-->
       <%= post.created_at %>
       <!--ユーザー名-->
@@ -15,4 +17,5 @@
       <%= post.title %>
     <% end %>
   <% end %>
+  <%= paginate @posts %>
 </div>
