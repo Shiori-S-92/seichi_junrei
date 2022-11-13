@@ -3,12 +3,18 @@ class Admin::PostsController < ApplicationController
   end
 
   def show
+    @post = Post.find(params[:id])
+    @post_comments = PostComment.all.page(params[:page])
   end
 
-  def edit
-  end
+  # def edit
+  # end
 
-  def update
+  # def update
+  # end
+
+  def destroy
+
   end
 
   private

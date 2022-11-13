@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     get 'top' => 'homes#top', as: 'top'
     # root to: 'homes#top'
     resources :users, only: [:index, :show, :edit, :update]
-    resources :posts, only: [:index, :show, :edit, :update]
+    resources :posts, only: [:index, :show, :destroy]
   end
 
   ## ユーザー用
