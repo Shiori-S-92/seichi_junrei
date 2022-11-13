@@ -1,1 +1,17 @@
-TOP
+<h1>swell へようこそ！</h1>
+
+<table class='jscroll-div'>
+  <% @posts.each do |post| %>
+    <%= link_to post_path(post.id) do %>
+      <!--投稿画像-->
+      <h5><%= image_tag post.get_image(100,100) %></h5>
+      <!--投稿日付-->
+      <p><%= post.created_at %></p>
+      <!--ユーザー名-->
+      <p><%= post.user_id %></p>
+      <!--タイトル-->
+      <p><%= post.title %></p>
+    <% end %>
+  <% end %>
+  <%= paginate @posts %>
+</table>
