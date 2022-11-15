@@ -1,5 +1,11 @@
 <h1>swell へようこそ！</h1>
 
+<div>
+  <% if user_signed_in? %>
+    <%= link_to '新規投稿', new_post_path, class: "btn btn-success" %>
+  <% end %>
+</div>
+
 <table class='jscroll-div'>
   <% @posts.each do |post| %>
     <%= link_to post_path(post.id) do %>

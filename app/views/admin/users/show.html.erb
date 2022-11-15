@@ -1,7 +1,7 @@
 <!--<h1>Admin::Users#show</h1>-->
 <!--<p>Find me in app/views/admin/users/show.html.erb</p>-->
 <div>
-  <h1><%= @user.name %>さんのユーザー情報詳細</h1>
+  <h1><%= @user.name %> さんのユーザー情報詳細</h1>
 
   <table>
     <!--<thead></thead>-->
@@ -35,7 +35,7 @@
   <!--会員の投稿一覧(青ボタン)-->
   <%#= link_to "会員の投稿一覧", class: "btn btn-primary"  %>
   <!--編集する（緑ボタン）-->
-  <%= link_to "編集する", class: "btn btn-success" %>
+  <%= link_to "編集する", edit_admin_user_path(@user.id), class: "btn btn-success" %>
 </div>
 
 <div>
