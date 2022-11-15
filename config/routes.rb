@@ -25,9 +25,17 @@ Rails.application.routes.draw do
     root 'homes#top'
     get '/about' => 'homes#about', as: 'about'
     get 'users/mypage' => 'users#show', as: 'mypage'
-    get 'users/unsubscribe' => 'users#unsubscribe'
-    patch 'users/withdraw' => 'users#withdraw'
-    resources :users, only: [:edit, :update]
+
+    ## users/editのようにするとdeviseのルーティングとかぶってしまうためinformationを付け加えている。
+    get 'users/information/edit' => 'users#edit', as: 'edit_information'
+    patch 'users/information' => 'users#update', as: 'update_information'
+    put 'users/information' => 'users#update'
+
+    # ↓ ユーザーの退会確認画面
+    get 'users/unsubscribe' => 'users#unsubscribe', as: 'confirm_unsubscribe'
+    # ↓ ユーザーの退会処理(ステータスの更新)
+    patch 'users/withdraw' => 'users#withdraw', as: 'withdraw_user'
+
     resources :posts, only: [:index, :new, :create, :show, :edit, :update, :destroy]
     resources :post_comments, only: [:create, :destroy]
   end

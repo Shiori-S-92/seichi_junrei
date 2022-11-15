@@ -1,2 +1,30 @@
-<h1>Public::Users#edit</h1>
-<p>Find me in app/views/public/users/edit.html.erb</p>
+<!--<h1>Public::Users#edit</h1>-->
+<!--<p>Find me in app/views/public/users/edit.html.erb</p>-->
+
+<h1>アカウント情報編集</h1>
+
+<%= form_with model:@user, url: update_information_path do |f| %>
+  <%#= render 'layouts/error_messages', resource: @user %>
+  <%= render "public/shared/error_messages", resource: resource %>
+  <table class="user_info user_form">
+    <!--<thead></thead>-->
+    <tbody>
+      <tr>
+        <td>ユーザーID</td>
+        <td><%= @user.id %></td>
+      </tr>
+      <tr>
+        <td><%= f.label :name, "ユーザー表示名" %></td>
+        <td><%= f.text_field :name, :placeholder =>"#{@user.name}" %></td>
+      </tr>
+      <tr>
+        <td><%= f.label :email, "メールアドレス" %></td>
+        <td colspan="2"><%= f.email_field :email, autocomplete: "email", :placeholder =>"#{@user.email}" %></td>
+      </tr>
+      <tr>
+        <td colspan="2"><%= f.submit "編集内容を保存する", class: "btn btn-primary" %></td>
+        <td><%= link_to "退会する", confirm_unsubscribe_path, class: "btn btn-danger" %></td>
+      </tr>
+    </tbody>
+  </table>
+<% end %>

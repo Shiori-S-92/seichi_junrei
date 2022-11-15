@@ -5,14 +5,23 @@ class Public::UsersController < ApplicationController
   end
 
   def edit
+    @user = current_user
   end
 
   def update
+    @user = current_user
+    if @user.update(customer_params)
+      redirect_to mypage_path, notice: 'ユーザー情報の更新が完了しました。'
+    else
+      render :edit
+    end
   end
 
+  # ユーザーの退会確認画面
   def unsubscribe
   end
 
+  # ユーザーの退会処理(ステータスの更新)
   def withdraw
   end
 
