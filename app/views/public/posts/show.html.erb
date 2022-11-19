@@ -1,2 +1,30 @@
-<h1>Public::Posts#show</h1>
-<p>Find me in app/views/public/posts/show.html.erb</p>
+<!--<h1>Public::Posts#show</h1>-->
+<!--<p>Find me in app/views/public/posts/show.html.erb</p>-->
+
+<h1>投稿詳細</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-md-5">
+      <p><%= image_tag post.image, size: "200x200" %></p>
+      <p><%= link_to @user.name, post_path(@user.id) %></p>
+      <p><%= @post.created_at %></p>
+      <br>
+      <p><%= @post.postal_code %></p>
+      <p><%= @post.address %></p>
+    </div>
+    <div class="col-md-6 offset-md-1">
+      <h3><b><%= @post.title %></b></h3>
+      <p><%= @post.content %></p>
+      <h5>コメント</h5>
+      <table class='jscroll-div'>
+        <% @post_comments.each do |post_comment| %>
+          <% post_user = post_comment.user %>
+          <tr>
+            <td><b><%= post_user.name %></b>&nbsp&nbsp</td>
+            <td><%= post_comment.comment %></td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>
