@@ -2,16 +2,18 @@
 <!--<p>Find me in app/views/public/posts/show.html.erb</p>-->
 
 <h1>投稿詳細</h1>
+
 <div class="container">
   <div class="row">
     <div class="col-md-5">
-      <p><%= image_tag post.image, size: "200x200" %></p>
+      <p><%= image_tag @post.image, size: "200x200" %></p>
       <p><%= link_to @user.name, post_path(@user.id) %></p>
       <p><%= @post.created_at %></p>
       <br>
       <p><%= @post.postal_code %></p>
       <p><%= @post.address %></p>
     </div>
+
     <div class="col-md-6 offset-md-1">
       <h3><b><%= @post.title %></b></h3>
       <p><%= @post.content %></p>
@@ -25,6 +27,18 @@
           </tr>
         <% end %>
       </table>
+      <!--↓ コメント新規追加欄-->
+      <p>
+        <!--コメント追記枠-->
+        <%= form_with model: @post_comment, local:true do |f| %>
+          <%= f.text_area :comment %>
+          <%= f.submit 'コメントする', class: "btn btn-success" %>
+        <% end %>
+      </p>
+      <!--「投稿を削除」赤ボタン_カレントユーザーの場合のみ-->
+      <% if @post.user == current_user %>
+        <%= link_to '投稿を削除', post_path, method: :delete, data: {confirm: "本当に削除しますか？"}, class: "btn btn-danger" %>
+      <% end %>
     </div>
   </div>
 </div>

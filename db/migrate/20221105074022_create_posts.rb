@@ -11,6 +11,11 @@ class CreatePosts < ActiveRecord::Migration[6.1]
       t.string :postal_code, null: false
       ## 住所
       t.string :address, null: false
+      # ## 都道府県
+      # t.string :prefecture_code, null: false
+      # t.string :city, null: false
+      # t.string :street, null: false
+      # t.string :other_address # 番地以降の住所がない場合もあるため、null: falseはつけない
 
       t.timestamps
     end
