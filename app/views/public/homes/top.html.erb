@@ -9,13 +9,14 @@
 <table class='jscroll-div'>
   <% @posts.each do |post| %>
     <%= link_to post_path(post.id) do %>
+      <% @post_user = post.user %>
       <!--投稿画像-->
       <!--<h5><%#= image_tag post.get_image(100,100) %></h5>-->
-      <p><%= image_tag post.image, size: "100x100" %></p>
+      <p><%= image_tag post.image, size: "200x200" %></p>
       <!--投稿日付-->
       <p><%= post.created_at %></p>
       <!--ユーザー名-->
-      <p><%= post.user_id %></p>
+      <p><%= @post_user.name %></p>
       <!--タイトル-->
       <p><%= post.title %></p>
     <% end %>

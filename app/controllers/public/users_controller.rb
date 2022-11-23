@@ -1,7 +1,8 @@
 class Public::UsersController < ApplicationController
   def show
-    @user = current_user
-    @posts = @user.posts.all.page(params[:page])
+    @user = User.find(params[:id])
+    # @posts = @user.posts.all.page(params[:page])
+    @posts = @user.posts.page(params[:page]).reverse_order
   end
 
   def edit
@@ -37,5 +38,8 @@ class Public::UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:name, :email, :encrypted_password, :is_active)
+  end
+  def post_params
+    params.require(:post).permit(:user_id, :title, :content, :postal_code, :address, :image)
   end
 end

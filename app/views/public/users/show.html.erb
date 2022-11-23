@@ -2,7 +2,13 @@
 <!--<p>Find me in app/views/public/users/show.html.erb</p>-->
 
 <div>
-  <h1>マイページ</h1>
+  <h1>
+    <% if user_signed_in? %>
+      マイページ
+    <% else %>
+      <%= @user.name %> さん詳細
+    <% end %>
+  </h1>
   <table>
     <!--<thead></thead>-->
     <tbody>
@@ -20,17 +26,18 @@
       </tr>
     </tbody>
   </table>
-
-  <%= link_to "編集する", edit_information_path(@user.id), class: "btn btn-success" %>
+  <% if user_signed_in? %>
+    <%= link_to "編集する", edit_information_path(current_user), class: "btn btn-success" %>
+  <% end %>
 </div>
 
 <div>
   <h1><%= @user.name %> さんの投稿一覧</h1>
   <div class='jscroll-div'>
     <% @posts.each do |post| %>
-      <%= link_to admin_post_path(post.id) do %>
+      <%= link_to post_path(post.id) do %>
         <!--投稿画像-->
-        <%= image_tag post.get_image(100,100) %>
+        <%= image_tag post.image, size: "100x100" %>
         <!--投稿日付-->
         <%= post.created_at %>
         <!--ユーザー名-->

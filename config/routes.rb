@@ -24,7 +24,7 @@ Rails.application.routes.draw do
   scope module: :public do
     root 'homes#top'
     get '/about' => 'homes#about', as: 'about'
-    get 'users/mypage' => 'users#show', as: 'mypage'
+    # get 'users/mypage' => 'users#show', as: 'mypage'
 
     ## users/editのようにするとdeviseのルーティングとかぶってしまうためinformationを付け加えている。
     get 'users/information/edit' => 'users#edit', as: 'edit_information'
@@ -36,6 +36,7 @@ Rails.application.routes.draw do
     # ↓ ユーザーの退会処理(ステータスの更新)
     patch 'users/withdraw' => 'users#withdraw', as: 'withdraw_user'
 
+    resources :users, only: [:show]
     resources :posts, only: [:index, :new, :create, :show, :edit, :update, :destroy]
     resources :post_comments, only: [:create, :destroy]
   end
