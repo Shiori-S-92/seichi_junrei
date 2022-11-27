@@ -4,9 +4,12 @@
 
 <%= form_with model: @post, url: '/posts', method: :post do |f| %>
   <%= render 'layouts/error_messages', resource: @post %>
-  <div class="field">
-    <%= f.label :image, "画像" %>
-    <%= f.file_field :image, accept: "image/*" %>
+  <!--<div class="field">-->
+  <div class="form-group">
+    <%= f.label :image, "画像", class: 'bmd-label-floating' %>
+    <%#= f.file_field :image, accept: "image/*" %>
+    <!-- ↓ 複数枚投稿できるように multiple: true 入れる-->
+    <%= f.file_field :images, multiple: true, class: 'form-control' %>
   </div>
   <div class="field">
     <%= f.label :title, "タイトル" %>

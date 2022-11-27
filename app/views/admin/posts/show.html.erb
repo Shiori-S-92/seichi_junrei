@@ -8,13 +8,13 @@
 <div>
   <!--画像（複数画像がある場合はスライド）-->
   <ul class ="gallery">
-   <% @cat.images.each do |image| %>
-     <li><%=image_tag image, class:"image-cat" %></li>
+   <% @post.each do |post| %>
+     <li><%= image_tag post.image, class:"image" %></li>
    <% end %>
   </ul>
   <ul class="choice-btn">
     <% @post.images.each do |image| %>
-      <li><%=image_tag image, class:"image-cat" %></li>
+      <li><%=image_tag image, class:"image" %></li>
     <% end %>
   </ul>
 

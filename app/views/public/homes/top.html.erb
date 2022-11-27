@@ -1,10 +1,14 @@
 <div class="container">
   <div class="row">
-    <h1>swell へようこそ！</h1>
-    <div>
-      <% if user_signed_in? %>
-        &nbsp<%= link_to '新規投稿', new_post_path, class: "btn btn-success" %>
-      <% end %>
+    <div class="col-md-9">
+        <h1>swell へようこそ！</h1>
+    </div>
+    <div class="col-md-2 offset-md-1">
+      <div style="text-align:center">
+        <% if user_signed_in? %>
+          &nbsp<%= link_to '新規投稿', new_post_path, class: "btn btn-success" %>
+        <% end %>
+      </div>
     </div>
   </div>
   <div class="row">
@@ -13,8 +17,11 @@
         <%= link_to post_path(post.id) do %>
           <% @post_user = post.user %>
           <!--投稿画像-->
-          <!--<h5><%#= image_tag post.get_image(100,100) %></h5>-->
-          <p><%= image_tag post.image, size: "200x200" %></p>
+          <p>
+            <% if post.images.any? %>
+              <%= image_tag post.images[0], size: "200x200" %>
+            <% end %>
+          </p>
           <!--投稿日付-->
           <p><%= post.created_at %></p>
           <!--ユーザー名-->

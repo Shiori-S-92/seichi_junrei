@@ -44,7 +44,7 @@
     <% @posts.each do |post| %>
       <%= link_to admin_post_path(post.id) do %>
         <!--投稿画像-->
-        <%= image_tag post.get_image(100,100) %>
+        <%= image_tag post.image, size: "100x100" %>
         <!--投稿日付-->
         <%= post.created_at %>
         <!--ユーザー名-->

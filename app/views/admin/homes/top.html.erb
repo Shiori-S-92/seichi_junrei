@@ -1,21 +1,28 @@
 <!--<h1>Admin::Homes#top</h1>-->
 <!--<p>Find me in app/views/admin/homes/top.html.erb</p>-->
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h1 style="text-align:center">swell 管理者サイト</h1>
+    </div>
+  </div>
+  <div class="row">
+    <h3>全ユーザー投稿一覧</h3>
+    <table class='jscroll-div'>
+      <% @posts.each do |post| %>
+        <%= link_to admin_post_path(post.id) do %>
+          <!--投稿画像-->
+          <h5><%= image_tag post.image, size: "200x200" %></h5>
+          <!--投稿日付-->
+          <p><%= post.created_at %></p>
+          <!--ユーザー名-->
+          <p><%= post.user_id %></p>
+          <!--タイトル-->
+          <p><%= post.title %></p>
+        <% end %>
+      <% end %>
+      <%= paginate @posts %>
+    </table>
+  </div>
+</div>
 
-<h1>swell 管理者サイト</h1>
-
-<h3>全ユーザー投稿一覧</h3>
-<table class='jscroll-div'>
-  <% @posts.each do |post| %>
-    <%= link_to admin_post_path(post.id) do %>
-      <!--投稿画像-->
-      <h5><%= image_tag post.get_image(100,100) %></h5>
-      <!--投稿日付-->
-      <p><%= post.created_at %></p>
-      <!--ユーザー名-->
-      <p><%= post.user_id %></p>
-      <!--タイトル-->
-      <p><%= post.title %></p>
-    <% end %>
-  <% end %>
-  <%= paginate @posts %>
-</table>
