@@ -18,8 +18,8 @@ class Public::PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
-    @user = @post.user
-    @post_comments = @post.post_comments
+    # @user = @post.user
+    # @post_comments = @post.post_comments
     @post_comment = PostComment.new
   end
 

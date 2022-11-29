@@ -32,7 +32,7 @@ $(document).on('turbolinks:load', function() {
 });
 */
 
-import "packs/swiper";
+// import "packs/swiper";
 // # ↓↓↓ swiper
 //= require swiper/swiper-bundle.js
 //= require swiper.js

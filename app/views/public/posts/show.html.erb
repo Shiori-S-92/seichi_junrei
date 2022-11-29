@@ -1,9 +1,11 @@
 <!--<h1>Public::Posts#show</h1>-->
 <!--<p>Find me in app/views/public/posts/show.html.erb</p>-->
 
-<h1>投稿詳細</h1>
-
 <div class="container">
+  <div class="row">
+    <h1>投稿詳細</h1>
+  </div>
+
   <div class="row">
     <div class="col-md-5">
       <div class="slider">
@@ -15,10 +17,10 @@
           <% end %>
         <% end %>
       </div>
-      <p><%= link_to @user.name, user_path(@user.id) %></p>
-      <p><%= @post.created_at %></p>
+      <p><%= link_to @post.user.name, user_path(@post.user.id) %></p>
+      <p><%= @post.created_at.to_s(:datetime_jp) %></p>
       <br>
-      <p><%= @post.postal_code %></p>
+      <p>〒<%= @post.postal_code.to_s.insert(3, "-") %></p>
       <p><%= @post.address %></p>
     </div>
 
@@ -27,25 +29,34 @@
       <p><%= @post.content %></p>
       <h5>コメント</h5>
       <table class='jscroll-div'>
-        <% @post_comments.each do |post_comment| %>
-          <% post_user == post_comment.user %>
+        <% @post.post_comments.each do |post_comment| %>
+          <%# post_user == post_comment.user %>
           <tr>
-            <td><b><%= post_user.name %></b>&nbsp&nbsp</td>
-            <td><%= post_comment.comment %></td>
+            <td><b><%= link_to @user.name, user_path(@user.id) %></b>&nbsp&nbsp</td>
+            <td><%= simple_format(post_comment.comment) %></td>
+            <td>
+              <% if user_signed_in? %>
+                <% if post_comment.user == current_user %>
+                  <%= link_to '削除', post_post_comment_path(@post, post_comment), method: :delete, data: {confirm: "本当に削除しますか？"}, class: "btn btn-danger" %>
+                <% end %>
+              <% end %>
+            </td>
           </tr>
         <% end %>
       </table>
       <!--↓ コメント新規追加欄-->
-      <p>
+      <div>
+        <%= render 'layouts/error_messages', resource: @post_comment %>
         <!--コメント追記枠-->
-        <%= form_with model: @post_comment, local:true do |f| %>
+        <%= form_with model: @post_comment, url: post_post_comments_path(@post), method: :post do |f| %>
           <%= f.text_area :comment %>
+          <%#= f.hidden_field :post_id, value: @post.id %>
           <%= f.submit 'コメントする', class: "btn btn-success" %>
         <% end %>
-      </p>
+      </div>
       <!--「投稿を削除」赤ボタン_カレントユーザーの場合のみ-->
       <% if @post.user == current_user %>
-        <%= link_to '投稿を削除', post_path, method: :delete, data: {confirm: "本当に削除しますか？"}, class: "btn btn-danger" %>
+        <%= link_to '投稿を削除', root_path, method: :delete, data: {confirm: "本当に削除しますか？"}, class: "btn btn-danger" %>
       <% end %>
     </div>
   </div>
@@ -56,6 +67,5 @@
   $(document).ready(function(){
       $('.slider').bxSlider();
     });
-
  })
 </script>

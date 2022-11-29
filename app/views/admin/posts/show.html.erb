@@ -1,52 +1,56 @@
 <!--<h1>Admin::Posts#show</h1>-->
 <!--<p>Find me in app/views/admin/posts/show.html.erb</p>-->
-
-<h1>投稿詳細</h1>
-
-
-<!--↓↓↓ 画面左側 ↓↓↓-->
-<div>
-  <!--画像（複数画像がある場合はスライド）-->
-  <ul class ="gallery">
-   <% @post.each do |post| %>
-     <li><%= image_tag post.image, class:"image" %></li>
-   <% end %>
-  </ul>
-  <ul class="choice-btn">
-    <% @post.images.each do |image| %>
-      <li><%=image_tag image, class:"image" %></li>
-    <% end %>
-  </ul>
-
-  <!--ユーザー名（ユーザー詳細に遷移）-->
-  <p><%= link_to @post.user.name, admin_user_path(user.id) %></p>
-  <!--投稿日時-->
-  <p><%= @post.created_at %></p>
-  <!--住所-->
-  <p><%= @post.address %></p>
-</div>
+<div class="container">
+  <div class="row">
+    <h1>投稿詳細</h1>
+  </div>
 
 
-<!--↓↓↓ 画面右側 ↓↓↓-->
-<div>
-  <!--title-->
-  <h3><%= @post.title %></h3>
-  <!--内容-->
-  <p><%= @post.content %></p>
-  <!--コメント一覧-->
-  <h4>コメント</h4>
-  <table class='jscroll-div'>
-    <% @post_comments.each do |post_comment| %>
-      <tr>
-        <td>
-          <b><%= post_comment.user_id %></b>
-          &nbsp&nbsp<%= post_comment.comment %>
-        </td>
-      </tr>
-    <% end %>
-    <%= paginate @post_comments %>
-  </table>
-  <!--「投稿を削除」赤ボタン-->
-  <%= link_to "投稿を削除", admin_post_path(@post.id), method: :delete, "data-confirm" => "削除します。よろしいですか？", class: "btn btn-danger" %>
 
+  <div class="row">
+    <!--↓↓↓ 画面左側 ↓↓↓-->
+    <div class="col-md-6">
+      <!--画像（複数画像がある場合はスライド）-->
+      <ul class ="gallery">
+       <% @post.each do |post| %>
+         <li><%= image_tag post.image, class:"image" %></li>
+       <% end %>
+      </ul>
+      <ul class="choice-btn">
+        <% @post.images.each do |image| %>
+          <li><%=image_tag image, class:"image" %></li>
+        <% end %>
+      </ul>
+
+      <!--ユーザー名（ユーザー詳細に遷移）-->
+      <p><%= link_to @post.user.name, admin_user_path(user.id) %></p>
+      <!--投稿日時-->
+      <p><%= @post.created_at %></p>
+      <!--住所-->
+      <p><%= @post.address %></p>
+    </div>
+
+    <!--↓↓↓ 画面右側 ↓↓↓-->
+    <div class="col-md-5 offset-md-1">
+      <!--title-->
+      <h3><%= @post.title %></h3>
+      <!--内容-->
+      <p><%= @post.content %></p>
+      <!--コメント一覧-->
+      <h4>コメント</h4>
+      <table class='jscroll-div'>
+        <% @post_comments.each do |post_comment| %>
+          <tr>
+            <td>
+              <b><%= post_comment.user_id %></b>
+              &nbsp&nbsp<%= post_comment.comment %>
+            </td>
+          </tr>
+        <% end %>
+        <%= paginate @post_comments %>
+      </table>
+      <!--「投稿を削除」赤ボタン-->
+      <%= link_to "投稿を削除", admin_post_path(@post.id), method: :delete, "data-confirm" => "削除します。よろしいですか？", class: "btn btn-danger" %>
+    </div>
+  </div>
 </div>

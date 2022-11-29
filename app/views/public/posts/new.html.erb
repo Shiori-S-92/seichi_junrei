@@ -1,34 +1,40 @@
 <!--<h1>Public::Posts#new</h1>-->
 <!--<p>Find me in app/views/public/posts/new.html.erb</p>-->
-<h1>新規投稿</h1>
+<div class="container">
+  <div class="row">
 
-<%= form_with model: @post, url: '/posts', method: :post do |f| %>
-  <%= render 'layouts/error_messages', resource: @post %>
-  <!--<div class="field">-->
-  <div class="form-group">
-    <%= f.label :image, "画像", class: 'bmd-label-floating' %>
-    <%#= f.file_field :image, accept: "image/*" %>
-    <!-- ↓ 複数枚投稿できるように multiple: true 入れる-->
-    <%= f.file_field :images, multiple: true, class: 'form-control' %>
-  </div>
-  <div class="field">
-    <%= f.label :title, "タイトル" %>
-    <%= f.text_field :title %>
-  </div>
-  <div class="field">
-    <%= f.label :content, "内容" %>
-    <%= f.text_area :content %>
-  </div>
+    <h1>新規投稿</h1>
 
-  <div class="field">
-      <%= f.label :postal_code, "郵便番号(ハイフンなし7桁)" %>
-      〒<%= f.text_field :postal_code, autocomplete: "postal_code", placeholder: "郵便番号", class: "jpostal_code" %>
+    <%= form_with model: @post, url: '/posts', method: :post do |f| %>
+      <%= render 'layouts/error_messages', resource: @post %>
+      <!--<div class="field">-->
+      <div class="form-group">
+        <%= f.label :image, "画像", class: 'bmd-label-floating' %>
+        <%#= f.file_field :image, accept: "image/*" %>
+        <!-- ↓ 複数枚投稿できるように multiple: true 入れる-->
+        <%= f.file_field :images, multiple: true, class: 'form-control' %>
+      </div>
+      <div class="field">
+        <%= f.label :title, "タイトル" %>
+        <%= f.text_field :title %>
+      </div>
+      <div class="field">
+        <%= f.label :content, "内容" %>
+        <%= f.text_area :content %>
+      </div>
+
+      <div class="field">
+          <%= f.label :postal_code, "郵便番号(ハイフンなし7桁)" %>
+          〒<%= f.text_field :postal_code, autocomplete: "postal_code", placeholder: "郵便番号", class: "jpostal_code" %>
+      </div>
+      <div class="field">
+        <%= f.label :address, "住所" %>
+        <%= f.text_field :address, autocomplete: "address", placeholder: "住所", class: "jpostal_address" %>
+      </div>
+      <div class="field">
+        <%= f.submit '投稿する', class: "btn btn-success" %>
+      </div>
+    <% end %>
   </div>
-  <div class="field">
-    <%= f.label :address, "住所" %>
-    <%= f.text_field :address, autocomplete: "address", placeholder: "住所", class: "jpostal_address" %>
-  </div>
-  <div class="field">
-    <%= f.submit '投稿する', class: "btn btn-success" %>
-  </div>
-<% end %>
+</div>
+
