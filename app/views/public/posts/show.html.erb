@@ -32,7 +32,7 @@
         <% @post.post_comments.each do |post_comment| %>
           <%# post_user == post_comment.user %>
           <tr>
-            <td><b><%= link_to @user.name, user_path(@user.id) %></b>&nbsp&nbsp</td>
+            <td><b><%= link_to post_comment.user.name, user_path(post_comment.user.id) %></b>&nbsp&nbsp</td>
             <td><%= simple_format(post_comment.comment) %></td>
             <td>
               <% if user_signed_in? %>

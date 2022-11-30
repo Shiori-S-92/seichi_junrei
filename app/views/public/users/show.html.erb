@@ -3,7 +3,7 @@
 
 <div>
   <h1>
-    <% if user_signed_in? %>
+    <% if @user == current_user %>
       マイページ
     <% else %>
       <%= @user.name %> さん詳細
@@ -26,30 +26,12 @@
       </tr>
     </tbody>
   </table>
-  <% if user_signed_in? %>
+  <% if @user == current_user %>
     <%= link_to "編集する", edit_information_path(current_user), class: "btn btn-success" %>
   <% end %>
 </div>
 
 <div>
   <h1><%= @user.name %> さんの投稿一覧</h1>
-  <div class='jscroll-div'>
-    <% @posts.each do |post| %>
-      <%= link_to post_path(post.id) do %>
-        <!--投稿画像-->
-        <p>
-          <% if post.images.any? %>
-            <%= image_tag post.images[0], size: "200x200" %>
-          <% end %>
-        </p>
-        <!--投稿日付-->
-        <p><%= post.created_at.to_s(:datetime_jp) %></p>
-        <!--ユーザー名-->
-        <!--<p><%#= post.user_id %></p>-->
-        <!--タイトル-->
-        <p><%= post.title %></p>
-      <% end %>
-    <% end %>
-    <%= paginate @posts %>
-  </div>
+  <%= render 'public/homes/timeline', posts: @posts %>
 </div>
