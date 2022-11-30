@@ -45,15 +45,17 @@
         <% end %>
       </table>
       <!--↓ コメント新規追加欄-->
-      <div>
-        <%= render 'layouts/error_messages', resource: @post_comment %>
-        <!--コメント追記枠-->
-        <%= form_with model: @post_comment, url: post_post_comments_path(@post), method: :post do |f| %>
-          <%= f.text_area :comment %>
-          <%#= f.hidden_field :post_id, value: @post.id %>
-          <%= f.submit 'コメントする', class: "btn btn-success" %>
-        <% end %>
-      </div>
+      <% if user_signed_in? %>
+        <div>
+          <%= render 'layouts/error_messages', resource: @post_comment %>
+          <!--コメント追記枠-->
+          <%= form_with model: @post_comment, url: post_post_comments_path(@post), method: :post do |f| %>
+            <%= f.text_area :comment %>
+            <%#= f.hidden_field :post_id, value: @post.id %>
+            <%= f.submit 'コメントする', class: "btn btn-success" %>
+          <% end %>
+        </div>
+      <% end %>
       <!--「投稿を削除」赤ボタン_カレントユーザーの場合のみ-->
       <% if @post.user == current_user %>
         <%= link_to '投稿を削除', root_path, method: :delete, data: {confirm: "本当に削除しますか？"}, class: "btn btn-danger" %>

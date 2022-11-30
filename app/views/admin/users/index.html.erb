@@ -1,32 +1,39 @@
 <!--<h1>Admin::Users#index</h1>-->
 <!--<p>Find me in app/views/admin/users/index.html.erb</p>-->
+<div class="container">
+  <div class="row">
+    <h1>会員一覧</h1>
+  </div>
 
-<h1>会員一覧</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>ユーザーID</th>
-      <th>ユーザー表示名</th>
-      <th>メールアドレス</th>
-      <th>ステータス</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @users.each do |user| %>
-      <tr>
-        <td><%= user.id %></td>
-        <td><%= link_to user.name, admin_user_path(user.id) %></td>
-        <td><%= user.email %></td>
-        <td>
-        	<% if user.is_active? %>
-        		<span class="text-active">有効</span>
-        	<% else %>
-        		<span class="text-invalid">退会済み</span>
-        	<% end %>
-        </td>
-      </tr>
-    <% end %>
-    <%= paginate @users %>
-  </tbody>
-</table>
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table table-hover table-inverse">
+        <thead>
+          <tr>
+            <th>ユーザーID</th>
+            <th>ユーザー表示名</th>
+            <th>メールアドレス</th>
+            <th>ステータス</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @users.each do |user| %>
+            <tr>
+              <td><%= user.id %></td>
+              <td><%= link_to user.name, admin_user_path(user.id) %></td>
+              <td><%= user.email %></td>
+              <td>
+              	<% if user.is_active? %>
+              		<span class="text-active", style="color: #0000FF"><b>有効</b></span>
+              	<% else %>
+              		<span class="text-invalid", style="color: #808080"><b>退会済み</b></span>
+              	<% end %>
+              </td>
+            </tr>
+          <% end %>
+          <%= paginate @users %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
