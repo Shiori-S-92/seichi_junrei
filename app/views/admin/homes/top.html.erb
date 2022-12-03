@@ -10,8 +10,28 @@
     <div class="col-md-12">
       <h3>全ユーザー投稿一覧</h3>
     </div>
-  <div class="row">
-    <%= render 'public/homes/timeline', posts: @posts %>
+  </div>
+  <div class='jscroll-div row'>
+    <% @posts.each do |post| %>
+      <div class='col-md-3 col-sm-6 col-lg-2'>
+        <%= link_to post_path(post.id) do %>
+          <%# @post_user = post.user %>
+          <!--投稿画像-->
+          <p>
+            <% if post.images.any? %>
+              <%= image_tag post.images[0], width:'100%' %>
+            <% end %>
+          </p>
+          <!--投稿日付-->
+          <p><%= post.created_at.to_s(:datetime_jp) %></p>
+          <!--ユーザー名-->
+          <p><%= post.user.name %></p>
+          <!--タイトル-->
+          <p><%= post.title %></p>
+        <% end %>
+      </div>
+    <% end %>
+    <%= paginate @posts %>
   </div>
 </div>
 
