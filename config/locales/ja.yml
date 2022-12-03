@@ -5,6 +5,8 @@ ja:
       post: 投稿
       post_comment: コメント
     attributes:
+      user:
+        name: ユーザー名
       post:
         title: タイトル
         content: 内容
