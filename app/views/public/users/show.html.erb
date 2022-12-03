@@ -1,37 +1,63 @@
 <!--<h1>Public::Users#show</h1>-->
 <!--<p>Find me in app/views/public/users/show.html.erb</p>-->
 
-<div>
-  <h1>
-    <% if @user == current_user %>
-      マイページ
-    <% else %>
-      <%= @user.name %> さん詳細
-    <% end %>
-  </h1>
-  <table>
-    <!--<thead></thead>-->
-    <tbody>
-      <tr>
-        <td>ユーザーID</td>
-        <td><%= @user.id %></td>
-      </tr>
-      <tr>
-        <td>ユーザー表示名</td>
-        <td><%= @user.name %></td>
-      </tr>
-      <tr>
-        <td>メールアドレス</td>
-        <td><%= @user.email %></td>
-      </tr>
-    </tbody>
-  </table>
-  <% if @user == current_user %>
-    <%= link_to "編集する", edit_information_path(current_user), class: "btn btn-success" %>
-  <% end %>
-</div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-5">
+      <h1>
+        <% if @user == current_user %>
+          マイページ
+        <% else %>
+          <%= @user.name %> さん詳細
+        <% end %>
+      </h1>
+      <table>
+        <!--<thead></thead>-->
+        <tbody>
+          <tr>
+            <td>ユーザーID</td>
+            <td><%= @user.id %></td>
+          </tr>
+          <tr>
+            <td>ユーザー表示名</td>
+            <td><%= @user.name %></td>
+          </tr>
+          <tr>
+            <td>メールアドレス</td>
+            <td><%= @user.email %></td>
+          </tr>
+        </tbody>
+      </table>
+      <% if @user == current_user %>
+        <%= link_to "編集する", edit_information_path(current_user), class: "btn btn-success" %>
+      <% end %>
+    </div>
 
-<div>
-  <h1><%= @user.name %> さんの投稿一覧</h1>
-  <%= render 'public/homes/timeline', posts: @posts %>
+    <div class="col-md-6">
+      <h1><%= @user.name %> さんの投稿一覧</h1>
+      <%#= render 'public/homes/timeline', posts: @posts %>
+      <div class='jscroll-div row'>
+        <% @posts.each do |post| %>
+          <div class='col-md-3 col-sm-6 col-lg-4'>
+            <%= link_to post_path(post.id) do %>
+              <%# @post_user = post.user %>
+              <!--投稿画像-->
+              <p>
+                <% if post.images.any? %>
+                  <%= image_tag post.images[0], width:'100%' %>
+                <% end %>
+              </p>
+              <!--投稿日付-->
+              <p><%= post.created_at.to_s(:datetime_jp) %></p>
+              <!--ユーザー名-->
+              <p><%= post.user.name %></p>
+              <!--タイトル-->
+              <p><%= post.title %></p>
+            <% end %>
+          </div>
+        <% end %>
+        <%= paginate @posts %>
+      </div>
+    </div>
+  </div>
 </div>
