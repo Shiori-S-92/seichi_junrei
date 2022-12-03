@@ -3,48 +3,65 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-5">
       <h3><b>ユーザー情報詳細</b></h3>
 
       <table class="table table-bordered">
-            <!--<thead></thead>-->
-            <tbody>
-              <tr>
-                <td>ユーザーID</td>
-                <td><%= @user.id %></td>
-              </tr>
-              <tr>
-                <td>ユーザー表示名</td>
-                <td><%= @user.name %></td>
-              </tr>
-              <tr>
-                <td>メールアドレス</td>
-                <td><%= @user.email %></td>
-              </tr>
-              <tr>
-                <td>ユーザーステータス</td>
-                <td>
-                	<% if @user.is_active? %>
-                		<span class="text-active">有効</span>
-                	<% else %>
-                		<span class="text-invalid">退会済み</span>
-                	<% end %>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+        <!--<thead></thead>-->
+        <tbody>
+          <tr>
+            <td>ユーザーID</td>
+            <td><%= @user.id %></td>
+          </tr>
+          <tr>
+            <td>ユーザー表示名</td>
+            <td><%= @user.name %></td>
+          </tr>
+          <tr>
+            <td>メールアドレス</td>
+            <td><%= @user.email %></td>
+          </tr>
+          <tr>
+            <td>ユーザーステータス</td>
+            <td>
+            	<% if @user.is_active? %>
+            		<span class="text-active">有効</span>
+            	<% else %>
+            		<span class="text-invalid">退会済み</span>
+            	<% end %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
       <!--編集する（緑ボタン）-->
       <%= link_to "編集する", edit_admin_user_path(@user.id), class: "btn btn-success" %>
     </div>
-  </div>
 
-  <div class="row">
     <!--<div class="col-md-8 offset-md-1">-->
-    <div class="col-md-12">
+    <div class="col-md-6">
       <h3><b><%= @user.name %> さんの投稿一覧</b></h3>
+      <div class='jscroll-div row'>
+        <% @posts.each do |post| %>
+          <div class='col-md-3 col-sm-6 col-lg-4'>
+            <%= link_to admin_post_path(post.id) do %>
+              <%# @post_user = post.user %>
+              <!--投稿画像-->
+              <p>
+                <% if post.images.any? %>
+                  <%= image_tag post.images[0], width:'100%' %>
+                <% end %>
+              </p>
+              <!--投稿日付-->
+              <p><%= post.created_at.to_s(:datetime_jp) %></p>
+              <!--ユーザー名-->
+              <p><%= post.user.name %></p>
+              <!--タイトル-->
+              <p><%= post.title %></p>
+            <% end %>
+          </div>
+        <% end %>
+        <%= paginate @posts %>
+      </div>
     </div>
-  </div>
-  <div class="row">
-      <%= render 'public/homes/timeline', posts: @posts %>
   </div>
 </div>

@@ -14,7 +14,7 @@
   <div class='jscroll-div row'>
     <% @posts.each do |post| %>
       <div class='col-md-3 col-sm-6 col-lg-2'>
-        <%= link_to post_path(post.id) do %>
+        <%= link_to admin_post_path(post.id) do %>
           <%# @post_user = post.user %>
           <!--投稿画像-->
           <p>

@@ -5,52 +5,55 @@
     <h1>投稿詳細</h1>
   </div>
 
-
-
   <div class="row">
-    <!--↓↓↓ 画面左側 ↓↓↓-->
-    <div class="col-md-6">
-      <!--画像（複数画像がある場合はスライド）-->
-      <ul class ="gallery">
-       <% @post.each do |post| %>
-         <li><%= image_tag post.image, class:"image" %></li>
-       <% end %>
-      </ul>
-      <ul class="choice-btn">
-        <% @post.images.each do |image| %>
-          <li><%=image_tag image, class:"image" %></li>
+    <div class="col-md-5">
+      <div class="slider">
+        <% if @post.images.present? %>
+          <% @post.images.each do |image| %>
+            <div style="width:100%">
+              <%= image_tag image, style: 'width:100%; height: 400px; object-fit:contain; text-align: center;',alt: '@post iamge' %>
+            </div>
+          <% end %>
         <% end %>
-      </ul>
-
-      <!--ユーザー名（ユーザー詳細に遷移）-->
-      <p><%= link_to @post.user.name, admin_user_path(user.id) %></p>
-      <!--投稿日時-->
-      <p><%= @post.created_at %></p>
-      <!--住所-->
-      <p><%= @post.address %></p>
+      </div>
     </div>
 
-    <!--↓↓↓ 画面右側 ↓↓↓-->
-    <div class="col-md-5 offset-md-1">
-      <!--title-->
-      <h3><%= @post.title %></h3>
-      <!--内容-->
+    <div class="col-md-6 offset-md-1">
+      <p><%= link_to @post.user.name, admin_user_path(@post.user.id) %></p>
+      <p><%= @post.created_at.to_s(:datetime_jp) %></p>
+      <br>
+      <p>〒<%= @post.postal_code.to_s.insert(3, "-") %></p>
+      <p><%= @post.address %></p>
+
+      <h3><b><%= @post.title %></b></h3>
       <p><%= @post.content %></p>
-      <!--コメント一覧-->
-      <h4>コメント</h4>
+      <h5>コメント</h5>
       <table class='jscroll-div'>
-        <% @post_comments.each do |post_comment| %>
+        <% @post.post_comments.each do |post_comment| %>
+          <%# post_user == post_comment.user %>
           <tr>
+            <td><b><%= link_to post_comment.user.name, admin_user_path(post_comment.user.id) %></b>&nbsp&nbsp</td>
+            <td><%= simple_format(post_comment.comment) %></td>
             <td>
-              <b><%= post_comment.user_id %></b>
-              &nbsp&nbsp<%= post_comment.comment %>
+              <% if admin_signed_in? %>
+                <%= link_to '削除', admin_post_post_comment_path(@post, post_comment), method: :delete, data: {confirm: "本当に削除しますか？"}, class: "btn btn-danger" %>
+              <% end %>
             </td>
           </tr>
         <% end %>
-        <%= paginate @post_comments %>
       </table>
-      <!--「投稿を削除」赤ボタン-->
-      <%= link_to "投稿を削除", admin_post_path(@post.id), method: :delete, "data-confirm" => "削除します。よろしいですか？", class: "btn btn-danger" %>
+      <!--「投稿を削除」赤ボタン_カレントユーザーの場合のみ-->
+      <% if admin_signed_in? %>
+        <%= link_to '投稿を削除', admin_top_path, method: :delete, data: {confirm: "本当に削除しますか？"}, class: "btn btn-danger" %>
+      <% end %>
     </div>
   </div>
 </div>
+
+<script>
+  $(document).on('turbolinks:load', function() {
+  $(document).ready(function(){
+      $('.slider').bxSlider();
+    });
+ })
+</script>
