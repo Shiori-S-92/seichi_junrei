@@ -4,26 +4,28 @@
 <div class="container">
   <div class="row">
     <div class="col-md-5">
-      <h1>
+      <h3>
+        <b>
         <% if @user == current_user %>
           マイページ
         <% else %>
           <%= @user.name %> さん詳細
         <% end %>
-      </h1>
+        </b>
+      </h3>
       <table class="table table-bordered">
         <!--<thead></thead>-->
         <tbody>
           <tr>
-            <td>ユーザーID</td>
+            <th>ユーザーID</th>
             <td><%= @user.id %></td>
           </tr>
           <tr>
-            <td>ユーザー表示名</td>
+            <th>ユーザー表示名</th>
             <td><%= @user.name %></td>
           </tr>
           <tr>
-            <td>メールアドレス</td>
+            <th>メールアドレス</th>
             <td><%= @user.email %></td>
           </tr>
         </tbody>
@@ -33,8 +35,8 @@
       <% end %>
     </div>
 
-    <div class="col-md-6">
-      <h1><%= @user.name %> さんの投稿一覧</h1>
+    <div class="col-md-7">
+      <h3><b><%= @user.name %> さんの投稿一覧</b></h3>
       <%#= render 'public/homes/timeline', posts: @posts %>
       <div class='jscroll-div row'>
         <% @posts.each do |post| %>
