@@ -34,7 +34,9 @@
         </tbody>
       </table>
       <!--編集する（緑ボタン）-->
-      <%= link_to "編集する", edit_admin_user_path(@user.id), class: "btn btn-success" %>
+      <% if admin_signed_in? %>
+        <%= link_to "編集する", edit_admin_user_path(@user.id), class: "btn btn-success" %>
+      <% end %>
     </div>
 
     <!--<div class="col-md-8 offset-md-1">-->

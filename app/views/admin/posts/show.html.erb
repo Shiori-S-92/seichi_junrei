@@ -21,13 +21,11 @@
     <div class="col-md-6 offset-md-1">
       <p><%= link_to @post.user.name, admin_user_path(@post.user.id) %></p>
       <p><%= @post.created_at.to_s(:datetime_jp) %></p>
-      <br>
       <p>〒<%= @post.postal_code.to_s.insert(3, "-") %></p>
       <p><%= @post.address %></p>
-
       <h3><b><%= @post.title %></b></h3>
       <p><%= @post.content %></p>
-      <h5>コメント</h5>
+      <h6><b>コメント</b></h6>
       <table class='jscroll-div'>
         <% @post.post_comments.each do |post_comment| %>
           <%# post_user == post_comment.user %>

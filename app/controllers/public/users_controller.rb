@@ -25,7 +25,7 @@ class Public::UsersController < ApplicationController
 
   # ユーザーの退会処理(ステータスの更新)
   def withdraw
-    @user.update(is_active: false)
+    current_user.update(is_active: false)
     reset_session
     redirect_to root_path
   end

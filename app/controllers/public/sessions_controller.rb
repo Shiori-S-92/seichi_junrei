@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Public::SessionsController < Devise::SessionsController
-  # before_action :configure_sign_in_params, only: [:create]
+  before_action :reject_inactive_user, only: [:create]
 
   # # GET /resource/sign_in
   # def new
@@ -37,11 +37,27 @@ class Public::SessionsController < Devise::SessionsController
   def reject_inactive_user
     @user = User.find_by(email: params[:user][:email])
     if @user
-      if @user.valid_password?(params[:user][:password]) && !@user.is_active
+      if @user.valid_password?(params[:user][:password]) && @user.is_active == false
         flash[:danger] = 'このアカウントは退会済みです。申し訳ございませんが、別のメールアドレスをお使いください。'
         redirect_to new_user_session_path
       end
     end
   end
+
+  # ## 退会しているかを判断するメソッド
+  # def user_state
+  #   ## 【処理内容1】 入力されたemailからアカウントを1件取得
+  #   @user = User.find_by(email: params[:user][:email])
+  #   ## アカウントを取得できなかった場合、このメソッドを終了する
+  #   return if !@user
+  #   ## 【処理内容2】 取得したアカウントのパスワードと入力されたパスワードが一致してるかを判別
+  #   if @user.valid_password?(params[:user][:password]) && (@user.is_active == true)
+  #   ## 【処理内容3】 退会していた場合の処理
+  #   # flash[:notice] = "退会済みです。再度ご登録をしてご利用ください。"
+  #   redirect_to new_user_session_path
+  #   # else
+  #   #   flash[:notice] = "項目を入力してください"
+  #   end
+  # end
 
 end

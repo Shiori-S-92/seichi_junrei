@@ -8,4 +8,4 @@
 <!--「退会する」赤ボタン-->
 <%= link_to "退会する", withdraw_user_path, method: :patch, "data-confirm" => "OKを押すと退会処理がされます。本当によろしいですか？", class: "btn btn-danger" %>
 <!--「退会しない」青ボタン-->
-<%= link_to "マイページに戻る", mypage_path, class: "btn btn-primary" %>
+<%= link_to "マイページに戻る", user_path(current_user.id), class: "btn btn-primary" %>
