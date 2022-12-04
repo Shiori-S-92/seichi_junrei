@@ -42,7 +42,7 @@
       </table>
       <!--「投稿を削除」赤ボタン_カレントユーザーの場合のみ-->
       <% if admin_signed_in? %>
-        <%= link_to '投稿を削除', admin_top_path, method: :delete, data: {confirm: "本当に削除しますか？"}, class: "btn btn-danger" %>
+        <%= link_to '投稿を削除', admin_post_path(@post), method: :delete, data: {confirm: "本当に削除しますか？"}, class: "btn btn-danger" %>
       <% end %>
     </div>
   </div>
