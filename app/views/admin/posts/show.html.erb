@@ -11,7 +11,7 @@
         <% if @post.images.present? %>
           <% @post.images.each do |image| %>
             <div style="width:100%">
-              <%= image_tag image, style: 'width:100%; height: 400px; object-fit:contain; text-align: center;',alt: '@post iamge' %>
+              <%= image_tag image, style: 'width:100%; height: 400px; object-fit:contain; text-align: center;',alt: '@post image' %>
             </div>
           <% end %>
         <% end %>
