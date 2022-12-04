@@ -11,28 +11,5 @@
       </div>
     </div>
   </div>
-  <%#= render 'timeline', posts: @posts %>
-  <div class='jscroll-div row'>
-    <% @posts.each do |post| %>
-      <div class='col-md-3 col-sm-6 col-lg-2'>
-        <%= link_to post_path(post.id) do %>
-          <%# @post_user = post.user %>
-          <!--投稿画像-->
-          <p>
-            <% if post.images.any? %>
-              <%#= image_tag post.images[0], width:'100%', height:'200px' %>
-              <%= image_tag post.images[0], style: 'width:100%; height: 200px; object-fit:contain; text-align: center;',alt: '@post image' %>
-            <% end %>
-          </p>
-          <!--投稿日付-->
-          <p><%= post.created_at.to_s(:datetime_jp) %></p>
-          <!--ユーザー名-->
-          <p><%= post.user.name %></p>
-          <!--タイトル-->
-          <p><%= post.title %></p>
-        <% end %>
-      </div>
-    <% end %>
-    <%= paginate @posts %>
-  </div>
+  <%= render 'timeline', posts: @posts %>
 </div>
