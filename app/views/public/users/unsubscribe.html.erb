@@ -1,11 +1,16 @@
 <!--<h1>Public::Users#unsubscribe</h1>-->
 <!--<p>Find me in app/views/public/users/unsubscribe.html.erb</p>-->
+<div class="container">
+  <div class="row">
+    <div class="col-md-12" style="text-align:center">
+      <h1><b>本当に退会しますか？</b></h1>
+      <p>退会すると、アカウント情報やこれまでの投稿が閲覧できなくなります。</p>
+      <p>退会する場合は、「退会する」をクリックしてください。</p>
 
-<h1>本当に退会しますか？</h1>
-<p>退会すると、アカウント情報やこれまでの投稿が閲覧できなくなります。</p>
-<p>退会する場合は、「退会する」をクリックしてください。</p>
-
-<!--「退会する」赤ボタン-->
-<%= link_to "退会する", withdraw_user_path, method: :patch, "data-confirm" => "OKを押すと退会処理がされます。本当によろしいですか？", class: "btn btn-danger" %>
-<!--「退会しない」青ボタン-->
-<%= link_to "マイページに戻る", user_path(current_user.id), class: "btn btn-primary" %>
+      <!--「退会する」赤ボタン-->
+      <%= link_to "退会する", withdraw_user_path, method: :patch, "data-confirm" => "OKを押すと退会処理がされます。本当によろしいですか？", class: "btn btn-danger" %>
+      <!--「退会しない」青ボタン-->
+      <%= link_to "マイページに戻る", user_path(current_user.id), class: "btn btn-primary" %>
+    </div>
+  </div>
+</div>
