@@ -1,4 +1,6 @@
 class Public::UsersController < ApplicationController
+  before_action :ensure_normal_user, only: [:edit, :destroy]
+
   def show
     @user = User.find(params[:id])
     # @posts = @user.posts.all.page(params[:page])
@@ -30,6 +32,11 @@ class Public::UsersController < ApplicationController
     redirect_to root_path
   end
 
+  def ensure_normal_user
+    if current_user.email == 'guest@aaa.com'
+      redirect_to user_path(current_user.id), alert: 'ゲストユーザーでは行えない操作です。'
+    end
+  end
 
   private
 

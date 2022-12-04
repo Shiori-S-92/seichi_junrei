@@ -2,6 +2,7 @@
 
 class Public::SessionsController < Devise::SessionsController
   before_action :reject_inactive_user, only: [:create]
+  # before_action :guest_sign_in, only: [:create]
 
   # # GET /resource/sign_in
   # def new
@@ -18,6 +19,11 @@ class Public::SessionsController < Devise::SessionsController
   #   super
   # end
 
+  def guest_sign_in
+    user = User.guest
+    sign_in user   # ユーザーをログインさせる
+    redirect_to root_path, notice: 'ゲストユーザーとしてログインしました。'
+  end
 
   protected
 
