@@ -31,7 +31,15 @@
     <table class='jscroll-div'>
       <% post.post_comments.each do |post_comment| %>
         <tr>
-          <td><b><%= link_to post_comment.user.name, user_path(post_comment.user.id) %></b>&nbsp&nbsp</td>
+          <td>
+            <b>
+              <% if admin_signed_in? %>
+                <%= link_to post_comment.user.name, admin_user_path(post_comment.user.id) %>
+              <% else %>
+                <%= link_to post_comment.user.name, user_path(post_comment.user.id) %>
+              <% end %>
+            </b>&nbsp&nbsp
+          </td>
           <td><%= simple_format(post_comment.comment) %></td>
           <td>
             <% if admin_signed_in? %>
