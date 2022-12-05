@@ -30,7 +30,6 @@
     <h6><b>コメント</b></h6>
     <table class='jscroll-div'>
       <% post.post_comments.each do |post_comment| %>
-        <%# post_user == post_comment.user %>
         <tr>
           <td><b><%= link_to post_comment.user.name, user_path(post_comment.user.id) %></b>&nbsp&nbsp</td>
           <td><%= simple_format(post_comment.comment) %></td>
@@ -53,7 +52,6 @@
         <!--コメント追記枠-->
         <%= form_with model: post_comment, url: post_post_comments_path(post), method: :post do |f| %>
           <%= f.text_area :comment, placeholder: "コメントする", size: "50x3" %><br>
-          <%#= f.hidden_field :post_id, value: post.id %>
           <%= f.submit 'コメントする', class: "btn btn-success" %>
         <% end %>
       </div>

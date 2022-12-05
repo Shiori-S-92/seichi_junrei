@@ -13,7 +13,6 @@
           <!--<div class="field">-->
           <div class="form-group">
             <%= f.label :image, "画像", class: 'bmd-label-floating' %><br>
-            <%#= f.file_field :image, accept: "image/*" %>
             <!-- ↓ 複数枚投稿できるように multiple: true 入れる-->
             <%= f.file_field :images, multiple: true, class: 'form-control' %>
           </div>

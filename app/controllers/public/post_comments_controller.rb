@@ -2,7 +2,6 @@ class Public::PostCommentsController < ApplicationController
   def create
     @post_comment = current_user.post_comments.new(post_comment_params)
     @post_comment.post_id = params[:post_id]
-    # @post = @post_comment.post.find(params[:post_id])
     if @post_comment.save
       redirect_to post_path(@post_comment.post_id) #コメント送信後は、一つ前のページへリダイレクトさせる。
     else

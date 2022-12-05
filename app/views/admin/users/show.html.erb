@@ -39,14 +39,12 @@
       <% end %>
     </div>
 
-    <!--<div class="col-md-8 offset-md-1">-->
     <div class="col-md-6">
       <h3><b><%= @user.name %> さんの投稿一覧</b></h3>
       <div class='jscroll-div row'>
         <% @posts.each do |post| %>
           <div class='col-md-3 col-sm-6 col-lg-4'>
             <%= link_to admin_post_path(post.id) do %>
-              <%# @post_user = post.user %>
               <!--投稿画像-->
               <p>
                 <% if post.images.any? %>

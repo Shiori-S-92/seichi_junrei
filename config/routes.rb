@@ -29,7 +29,6 @@ Rails.application.routes.draw do
   scope module: :public do
     root 'homes#top'
     get '/about' => 'homes#about', as: 'about'
-    # get 'users/mypage' => 'users#show', as: 'mypage'
 
 
     ## users/editのようにするとdeviseのルーティングとかぶってしまうためinformationを付け加えている。
